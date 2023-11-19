@@ -1,0 +1,64 @@
+name: SampleGenerated
+
+options:
+  minimumXcodeGenVersion: 2.37.0
+  createIntermediateGroups: true
+  groupSortPosition: top
+  groupOrdering: 
+    - pattern: Sample
+      order: [Sources, Resources, Tests, Packages, Products]
+
+settings:
+  base:
+    IPHONEOS_DEPLOYMENT_TARGET: 16.4
+    TARGETED_DEVICE_FAMILY: 1
+
+targets:
+  SampleApp:
+    type: application
+    platform: iOS
+    deploymentTarget: 16.4
+    info:
+      path: Sample/Resources/Generated/Info.generated.plist
+      properties:
+        CFBundleDevelopmentRegion: $(DEVELOPMENT_LANGUAGE)
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: 6.0
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: $(PRODUCT_BUNDLE_PACKAGE_TYPE)
+        CFBundleShortVersionString: ${MARKETING_VERSION}
+        CFBundleVersion: ${CURRENT_PROJECT_VERSION}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UIApplicationSupportsIndirectInputEvents: true
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: true
+          UISceneConfigurations:
+        LSRequiresIPhoneOS: true
+    settings:
+      base:
+        INFOPLIST_FILE: Sample/Resources/Generated/Info.generated.plist
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.alexkamanin.SampleApp
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0
+        DEVELOPMENT_ASSET_PATHS:
+          - Sample/Resources/Preview
+    sources:
+       - path: Sample
+         excludes:
+          - "**/.gitkeep"
+    scheme:
+      testTargets:
+        - SampleUnitTests
+
+  SampleUnitTests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+        - target: SampleApp
+    sources:
+       - path: SampleUnitTests
